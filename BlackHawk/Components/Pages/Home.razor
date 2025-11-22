@@ -1,7 +1,20 @@
 ﻿@page "/"
+@rendermode InteractiveServer
 
-<PageTitle>Home</PageTitle>
+<h1>Hello, comic watch list 👋</h1>
 
-<h1>Hello, world!</h1>
+<p>Welcome to the test app — this page is generated and served by Blazor Server (C#).</p>
 
-Welcome to your new app.
+<p role="status">@message</p>
+<input @bind="userName" placeholder="Type your name" />
+<button class="btn btn-primary" @onclick="Greet">Say Hello</button>
+
+@code {
+    string message = "";
+    string userName = "";
+
+    public void Greet()
+    {
+        message = $"Welcome, {userName}, to the machine...";
+    }
+}

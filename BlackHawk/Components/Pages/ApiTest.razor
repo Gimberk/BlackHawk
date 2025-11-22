@@ -1,0 +1,20 @@
+﻿@page "/testapi"
+
+@using BlackHawk.Services
+@rendermode InteractiveServer
+@inject PriceChartingService PriceService
+
+<h1>API Test</h1>
+
+<p>Average Price: @average</p>
+
+<button class="btn btn-primary" @onclick="Load">Load</button>
+
+@code {
+    decimal? average;
+
+    async Task Load()
+    {
+        average = await PriceService.GetAveragePriceAsync("ASM300");
+    }
+}

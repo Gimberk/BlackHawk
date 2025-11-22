@@ -1,6 +1,7 @@
 using BlackHawk.Components;
 using BlackHawk.Components.Account;
 using BlackHawk.Data;
+using BlackHawk.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -14,10 +15,15 @@ namespace BlackHawk {
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();
 
+
+            // Auth services
             builder.Services.AddCascadingAuthenticationState();
             builder.Services.AddScoped<IdentityUserAccessor>();
             builder.Services.AddScoped<IdentityRedirectManager>();
             builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
+
+            // Price API services
+            builder.Services.AddHttpClient<PriceChartingService>();
 
             builder.Services.AddAuthentication(options =>
                 {
@@ -45,7 +51,6 @@ namespace BlackHawk {
                 app.UseMigrationsEndPoint();
             else {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
